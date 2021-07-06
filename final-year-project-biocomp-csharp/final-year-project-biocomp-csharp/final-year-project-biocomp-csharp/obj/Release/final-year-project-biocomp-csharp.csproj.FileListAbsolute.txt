@@ -1,0 +1,13 @@
+D:\GitHub\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\bin\Release\final-year-project-biocomp-csharp.exe.config
+D:\GitHub\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\bin\Release\final-year-project-biocomp-csharp.exe
+D:\GitHub\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\bin\Release\final-year-project-biocomp-csharp.pdb
+D:\GitHub\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.csprojAssemblyReference.cache
+D:\GitHub\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.exe
+D:\GitHub\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.pdb
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\bin\Release\final-year-project-biocomp-csharp.exe.config
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\bin\Release\final-year-project-biocomp-csharp.exe
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\bin\Release\final-year-project-biocomp-csharp.pdb
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.exe
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.pdb
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.csproj.AssemblyReference.cache
+D:\GitHub\final-year-project-biocomp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\final-year-project-biocomp-csharp\obj\Release\final-year-project-biocomp-csharp.csproj.CoreCompileInputs.cache
