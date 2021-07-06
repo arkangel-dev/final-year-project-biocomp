@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
     public class Simulation {
         public List<Candidate> Candidates;
-        
+
         public float CurrentGenerationScore;
         public int PopulationCount;
         public int MutateIterations;
@@ -28,7 +28,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         public Simulation(int inputcount) {
             VarInit();
             this.InputCount = inputcount;
-            for (int i=0; i < this.PopulationCount; i++) {
+            for (int i = 0; i < this.PopulationCount; i++) {
                 this.Candidates.Add(new Candidate(inputcount));
             }
         }
@@ -45,9 +45,9 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         private void VarInit() {
             this.Candidates = new List<Candidate>();
             this.InputCount = 6;
-            this.PopulationCount = 25;
+            this.PopulationCount = 50;
             this.CurrentGenerationScore = 0.0f;
-            this.MutateIterations = 20;
+            this.MutateIterations = 11;
             this.MixIterations = 1;
             this.MutationMagnitude = 0.1f;
             this.MinMutationMagnitude = 0.0001f;
@@ -61,7 +61,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         /// <param name="TraininData">Training data set</param>
         public void RunExamAndSort(List<ProcessableStruct> TraininData) {
             this.CurrentGenerationScore = 0.0f;
-            
+
             foreach (var candidate in this.Candidates) {
                 this.CurrentGenerationScore += candidate.RunTest(TraininData);
             }
@@ -83,13 +83,10 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                 WeightedBag.AddEntry(candidate, candidate.Score / this.CurrentGenerationScore);
             }
             var TopCandidate = this.Candidates[0];
-
-
-
-
-
-
+            this.Candidates.Clear();
             this.Candidates.Add(TopCandidate);
+
+
 
             for (int i = 0; i < this.PopulationCount / 2; i++) {
                 var parent_a = WeightedBag.GetRandom();
@@ -100,7 +97,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                     parent_b.Brain.GetBrainConfiguration()
                 );
 
-                var child_a = new Candidate(layerCount,nodesPerLayer);
+                var child_a = new Candidate(layerCount, nodesPerLayer);
                 var child_b = new Candidate(layerCount, nodesPerLayer);
 
                 child_a.Brain.SetBrainConfiguration(mixed.Item1);
@@ -126,13 +123,13 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                 b.InsertRange(intersection_point, atemp.GetRange(intersection_point, atemp.Count - intersection_point));
             }
 
-            if (Common.GlobalRandom.Next(0, 100) == 0) {
+            if (Common.GlobalRandom.Next(0, 10) == 0) {
                 for (int i = 0; i < MutateIterations; i++) {
-                
+
                     int mutate_point = Common.GlobalRandom.Next(0, a.Count);
 
 
-                    if (Common.GlobalRandom.Next(0, 10) == 0) {
+                    if (Common.GlobalRandom.Next(0, 2) == 0) {
                         a[mutate_point] = Common.GetRandomNumber(-1, 1);
                         b[mutate_point] = Common.GetRandomNumber(-1, 1);
                     } else {
@@ -160,11 +157,11 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         }
         public float CompletionTimeSeconds = 0.0f;
         public void RunSimulation(List<ProcessableStruct> c, int Iterations) {
-            
+
             Console.CancelKeyPress += ExitConsole;
 
             RunExamAndSort(c);
-            
+
             float LastScore = -1;
             var first_best_score = this.Candidates[0].Score;
             var defaultColor = Console.ForegroundColor;
@@ -175,7 +172,6 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
 
 
             var StartTime = DateTime.Now;
-            var originalMutationMagnitude = MutationMagnitude;
 
             for (int i = 0; i < Iterations; i++) {
                 JumpIterations++;
@@ -195,7 +191,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
 
                     );
 
-                
+
                 if (this.Candidates[0].Score > LastScore) {
                     SimJumpCount++;
                     Console.Write(debugl);
@@ -226,14 +222,14 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                 if (JumpIterations > MaxSearchPeriod) {
 
                     JumpIterations = 0;
-           
+
                     if (this.MutateIterations > 1) this.MutateIterations -= 10;
                     this.MaxSearchPeriod += 3000;
-                    
+
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("\n");
-                    
+
                     Console.WriteLine("Refining max search time...");
                     Console.WriteLine("Refining mutation magnitude...");
                     Console.WriteLine("New mutation rate : " + this.MutateIterations.ToString() + " cycles");
@@ -243,9 +239,6 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                         this.MutationMagnitude = this.MutationMagnitude / 10;
                         Console.WriteLine("Refining mutation rate...");
                         Console.WriteLine("New mutation magnitude : " + this.MutationMagnitude.ToString());
-                    } else {
-                        Console.WriteLine("Resetting mutation magnitude...");
-                        this.MinMutationMagnitude = originalMutationMagnitude;
                     }
                     Console.WriteLine("");
                     Console.ForegroundColor = defaultColor;
@@ -325,15 +318,15 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
             foreach (var f in configLine[5].Split(',')) {
                 BrainConf.Add(float.Parse(f));
             }
-            
-            
+
+
             var c = new Candidate(HiddenLayerCount, NodesPerHiddenLayerCount, 6, 2);
             c.Name = configLine[2];
             c.Brain.SetBrainConfiguration(BrainConf);
             return c;
         }
 
-        
+
 
         private void ExitConsole(object sender, ConsoleCancelEventArgs e) {
             Console.WriteLine("");
@@ -342,8 +335,8 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
             Console.ReadLine();
         }
 
-     
-      
+
+
 
     }
 }

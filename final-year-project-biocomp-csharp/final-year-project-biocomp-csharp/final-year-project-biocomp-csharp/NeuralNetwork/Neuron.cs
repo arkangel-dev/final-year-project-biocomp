@@ -31,13 +31,14 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
             for (int i = 0; i < Input.Count; i++) {
                 this.Output += Input[i] * this.Weights[i];
             }
-            this.Output = this.Bias + Common.ActivationFunction(this.Output);
+            this.Output += this.Bias;
+            this.Output = Common.ActivationFunction(this.Output);
             return this.Output;
         }
 
 
-        
-        
+
+
 
 
     }

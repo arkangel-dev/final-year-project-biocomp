@@ -12,9 +12,6 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
         public int InputLayerCount = 0;
 
         public List<List<Neuron>> Layers;
-        public List<float> BrainConfigCache;
-
-        public bool BrainConfigUpdated = true;
 
         /// <summary>
         /// Constructor for the neural network class. This is essentially the brain of the candidates in
@@ -62,9 +59,9 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
 
             // Process the output layer of the neural network
             foreach (var neuron in this.Layers[this.Layers.Count - 1]) neuron.CalculateOutput(this.GetValuesFromLayer(this.Layers[this.Layers.Count - 2]));
-            
+
             // Return the final layer
-            return this.GetValuesFromLayer(this.Layers[this.Layers.Count - 1]); 
+            return this.GetValuesFromLayer(this.Layers[this.Layers.Count - 1]);
 
 
         }
@@ -101,15 +98,12 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
         /// </summary>
         /// <returns>List of the weights</returns>
         public List<float> GetBrainConfiguration() {
-            if (!BrainConfigUpdated) return this.BrainConfigCache.ToList();
             var weights = new List<float>();
             foreach (var layer in this.Layers)
                 foreach (var neuron in layer) {
                     weights.AddRange(neuron.Weights);
                     weights.Add(neuron.Bias);
                 }
-            this.BrainConfigCache = weights.ToList();
-            BrainConfigUpdated = false;
             return weights;
         }
 
@@ -118,8 +112,6 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
         /// </summary>
         /// <param name="weights">Weights to set</param>
         public void SetBrainConfiguration(List<float> weights) {
-            //BrainConfigUpdated = true;
-            this.BrainConfigCache = weights.ToList();
             foreach (var layer in this.Layers) {
                 foreach (var neuron in layer) {
                     neuron.Weights = weights.GetRange(0, neuron.Weights.Count);
@@ -127,7 +119,7 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
                     neuron.Bias = weights[0];
                     weights.RemoveAt(0);
                 }
-            }   
+            }
         }
 
     }
