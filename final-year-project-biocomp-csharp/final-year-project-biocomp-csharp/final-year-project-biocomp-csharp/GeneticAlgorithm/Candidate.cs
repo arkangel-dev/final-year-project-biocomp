@@ -11,8 +11,8 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         public string Name;
 
 
-        public int BrainConf_HiddenLayerCount = 2;
-        public int BrainConf_NodesPerHiddenLayer = 3;
+        public int BrainConf_HiddenLayerCount = 5;
+        public int BrainConf_NodesPerHiddenLayer = 2;
         public int BrainConf_OutputLayerCount = 2;
         public int BrainConf_InputLayerCount = 6;
 

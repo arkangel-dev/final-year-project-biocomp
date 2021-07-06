@@ -45,9 +45,9 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         private void VarInit() {
             this.Candidates = new List<Candidate>();
             this.InputCount = 6;
-            this.PopulationCount = 50;
+            this.PopulationCount = 25;
             this.CurrentGenerationScore = 0.0f;
-            this.MutateIterations = 11;
+            this.MutateIterations = 20;
             this.MixIterations = 1;
             this.MutationMagnitude = 0.1f;
             this.MinMutationMagnitude = 0.0001f;
@@ -83,10 +83,13 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                 WeightedBag.AddEntry(candidate, candidate.Score / this.CurrentGenerationScore);
             }
             var TopCandidate = this.Candidates[0];
-            this.Candidates.Clear();
-            this.Candidates.Add(TopCandidate);
 
-            
+
+
+
+
+
+            this.Candidates.Add(TopCandidate);
 
             for (int i = 0; i < this.PopulationCount / 2; i++) {
                 var parent_a = WeightedBag.GetRandom();
@@ -123,13 +126,13 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                 b.InsertRange(intersection_point, atemp.GetRange(intersection_point, atemp.Count - intersection_point));
             }
 
-            if (Common.GlobalRandom.Next(0, 10) == 0) {
+            if (Common.GlobalRandom.Next(0, 100) == 0) {
                 for (int i = 0; i < MutateIterations; i++) {
                 
                     int mutate_point = Common.GlobalRandom.Next(0, a.Count);
 
 
-                    if (Common.GlobalRandom.Next(0, 2) == 0) {
+                    if (Common.GlobalRandom.Next(0, 10) == 0) {
                         a[mutate_point] = Common.GetRandomNumber(-1, 1);
                         b[mutate_point] = Common.GetRandomNumber(-1, 1);
                     } else {
@@ -172,6 +175,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
 
 
             var StartTime = DateTime.Now;
+            var originalMutationMagnitude = MutationMagnitude;
 
             for (int i = 0; i < Iterations; i++) {
                 JumpIterations++;
@@ -239,6 +243,9 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                         this.MutationMagnitude = this.MutationMagnitude / 10;
                         Console.WriteLine("Refining mutation rate...");
                         Console.WriteLine("New mutation magnitude : " + this.MutationMagnitude.ToString());
+                    } else {
+                        Console.WriteLine("Resetting mutation magnitude...");
+                        this.MinMutationMagnitude = originalMutationMagnitude;
                     }
                     Console.WriteLine("");
                     Console.ForegroundColor = defaultColor;

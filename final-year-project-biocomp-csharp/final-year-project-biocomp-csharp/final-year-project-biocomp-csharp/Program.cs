@@ -9,77 +9,50 @@ namespace final_year_project_biocomp_csharp {
 
 
         public static void Main(string[] args) {
+
+            Console.WriteLine("Running Dataset Processor...");
+
+            var ds1_p = new DatasetProcessors.Dataset3.FromScratchProcessor();
+            ds1_p.Train(ProcessableStruct.ReadData3_Training(), 1000);
+            var score = ds1_p.Test(ProcessableStruct.ReadData3_Testing());
+
+            Console.WriteLine($"Data set 3 score : {score}...");
+        }
+
+        public static void RunKNNTest() {
             Console.WriteLine("Starting program...");
 
 
+            var data2Training = ProcessableStruct.ReadData2_Training();
+            var data2Testing = ProcessableStruct.ReadData2_Testing();
+            var knn = new KNN.KNNHandler();
 
-            var sim = new GeneticAlgorithm.Simulation(3,2);
-            //training session
-            sim.RunSimulation(GeneticAlgorithm.ProcessableStruct.ReadData3_Training(), 10000);
+            foreach (var rp in data2Training) {
+                knn.AddReferencePoint(rp.Output, rp.Inputs.ToArray());
+            }
 
-            //var cand = sim.Candidates[0];
-            //Console.WriteLine(String.Format("Candidate '{0}' scored {1}% accuracy", cand.Name, cand.RunTest(GeneticAlgorithm.ProcessableStruct.ReadData3_Testing()) * 100));
+            int correct = 0;
+            foreach (var tp in data2Testing) {
 
+                var expected = tp.Output;
+                var actual = knn.GetProbablePoint(tp.Inputs.ToArray());
 
-            ////Console.WriteLine("Done program");
-            ////Console.ReadLine();
+                Console.WriteLine($"Expecting {expected} --> Actual {actual}");
 
-            //BrainConfigurationTest();
-        }
-
-        private static void BrainConfigurationTest() {
-            int maxNeuronPerLayerCount = 10;
-            int minNeuronPerLayerCount = 1;
-            int maxLayerCount = 10;
-            int minLayerCount = 1;
-            int AverageCount = 3;
-
-            string csv_string = "";
-
-            for (int layer = minLayerCount; layer < maxLayerCount; layer++) {
-                for (int neuron = minNeuronPerLayerCount; neuron < maxNeuronPerLayerCount; neuron++) {
-                    float total_score = 0.0f;
-                    float total_time = 0.0f;
-                    int total_jumps = 0;
-                    for (int i = 0; i < AverageCount; i++) {
-                        
-                        var sim = new GeneticAlgorithm.Simulation(neuron, layer);
-                        sim.RunSimulation(GeneticAlgorithm.ProcessableStruct.ReadData3_Training(), 500);
-                        total_score += sim.Candidates[0].Score;
-                        total_time += sim.CompletionTimeSeconds;
-                        total_jumps += sim.SimJumpCount;
-                    }
-                    float average_score = total_score / AverageCount;
-                    float average_time = total_time / AverageCount;
-                    float average_jumps = total_jumps / AverageCount;
-
-                    Console.WriteLine("\n================================================================");
-                    Console.WriteLine(
-                            String.Format("Layers : {0} | Nodes : {1} | Time : {2} | Score {3} | Jumps {4}",
-                            layer,
-                            neuron,
-                            average_time,
-                            average_score,
-                            average_jumps
-                        ));
-
-                    Console.WriteLine("\n\n\n\n");
-
-                    csv_string += String.Format("{0},{1},{2},{3},{4}\n",
-                        layer,
-                        neuron, 
-                        average_time,
-                        average_score,
-                        average_jumps
-                        );
-                    System.IO.File.WriteAllText(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "BrainStructConfig.csv"), csv_string);
+                if (expected == actual) {
+                    correct++;
                 }
             }
-            //System.IO.File.WriteAllText(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "BrainStructConfig.csv"), csv_string);
+
+            Console.WriteLine($"Correct : {correct} correct out of {data2Testing.Count}");
+            Console.ReadLine();
+
         }
 
 
 
-      
+
+
+
     }
 }

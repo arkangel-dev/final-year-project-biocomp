@@ -44,9 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="DatasetProcessors\Dataset1\Processor.cs" />
+    <Compile Include="DatasetProcessors\Dataset3\FromScratchProcessor.cs" />
+    <Compile Include="DatasetProcessors\ProcessorInterface.cs" />
     <Compile Include="GeneticAlgorithm\Candidate.cs" />
-    <Compile Include="GeneticAlgorithm\ProcessableStruct.cs" />
+    <Compile Include="ProcessableStruct.cs" />
     <Compile Include="GeneticAlgorithm\Simulation.cs" />
+    <Compile Include="KNN\KNNDistanceResult.cs" />
+    <Compile Include="KNN\KNNHandler.cs" />
+    <Compile Include="KNN\KNNPoint.cs" />
     <Compile Include="NeuralNetwork\NeuralNetwork.cs" />
     <Compile Include="NeuralNetwork\Neuron.cs" />
     <Compile Include="Program.cs" />
@@ -55,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DatasetProcessors\Dataset2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

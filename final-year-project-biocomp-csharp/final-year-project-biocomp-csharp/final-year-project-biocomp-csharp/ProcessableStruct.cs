@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
+namespace final_year_project_biocomp_csharp {
     public class ProcessableStruct {
         public List<float> Inputs;
         public float Output;
