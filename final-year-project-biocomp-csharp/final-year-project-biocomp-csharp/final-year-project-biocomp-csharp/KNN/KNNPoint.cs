@@ -26,7 +26,7 @@ namespace final_year_project_biocomp_csharp.KNN {
             
             double total = 0;
             for (int i = 0; i < this.DimensionValues.Count; i++) {
-                total += Math.Pow((this.DimensionValues[i] + ReferenceDimensionValues[i]), 2);
+                total += Math.Pow((this.DimensionValues[i] - ReferenceDimensionValues[i]), 2);
             }
 
      

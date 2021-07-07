@@ -10,13 +10,21 @@ namespace final_year_project_biocomp_csharp {
 
         public static void Main(string[] args) {
 
-            Console.WriteLine("Running Dataset Processor...");
+            Console.WriteLine("Running Dataset 3 Processor (Genetic Algorithm) (2000 Iterations)...");
+            var ds3_p = new DatasetProcessors.Dataset3.FromScratchProcessor();
+            ds3_p.Train(ProcessableStruct.ReadData3_Training(), 2000);
+            var ds3_score = ds3_p.Test(ProcessableStruct.ReadData3_Testing());
+            Console.WriteLine($"Dataset 3 testing score : {ds3_score}...\nPress enter to continue...\n\n");
+            Console.ReadLine();
 
-            var ds1_p = new DatasetProcessors.Dataset3.FromScratchProcessor();
-            ds1_p.Train(ProcessableStruct.ReadData3_Training(), 1000);
-            var score = ds1_p.Test(ProcessableStruct.ReadData3_Testing());
+            //Console.WriteLine("Running Dataset 2 Processor (KNN)");
+            //var ds2_p = new DatasetProcessors.Dataset2.KNNProcessor();
+            //ds2_p.Train(ProcessableStruct.ReadData2_Training());
+            //var ds2_score = ds2_p.Test(ProcessableStruct.ReadData2_Testing());
+            //Console.WriteLine($"Dataset 3 testing score : {ds2_score}...\nPress enter to continue...\n\n");
+            //Console.ReadLine();
 
-            Console.WriteLine($"Data set 3 score : {score}...");
+
         }
 
         public static void RunKNNTest() {

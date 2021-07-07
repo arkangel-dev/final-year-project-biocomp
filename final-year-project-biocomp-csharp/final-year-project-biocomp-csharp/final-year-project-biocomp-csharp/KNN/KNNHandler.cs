@@ -31,7 +31,7 @@ namespace final_year_project_biocomp_csharp.KNN {
 
 
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 3; i++) {
 
                 if (HitCount.TryGetValue(distances[i].Value.Value, out _)) {
                     HitCount[distances[i].Value.Value]++;

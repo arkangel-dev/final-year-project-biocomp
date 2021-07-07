@@ -114,10 +114,14 @@ namespace final_year_project_biocomp_csharp.NeuralNetwork {
         public void SetBrainConfiguration(List<float> weights) {
             foreach (var layer in this.Layers) {
                 foreach (var neuron in layer) {
-                    neuron.Weights = weights.GetRange(0, neuron.Weights.Count);
-                    weights.RemoveRange(0, neuron.Weights.Count);
-                    neuron.Bias = weights[0];
-                    weights.RemoveAt(0);
+                    try {
+                        neuron.Weights = weights.GetRange(0, neuron.Weights.Count);
+                        weights.RemoveRange(0, neuron.Weights.Count);
+                        neuron.Bias = weights[0];
+                        weights.RemoveAt(0);
+                    } catch (Exception e) {
+                        
+                    }
                 }
             }
         }
