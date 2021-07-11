@@ -1,32 +1,30 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace final_year_project_biocomp_csharp.DatasetProcessors.Dataset2 {
+namespace final_year_project_biocomp_csharp.DatasetProcessors.Dataset1 {
     public class KNNProcessor : ProcessorInterface {
 
-        KNN.KNNHandler KProcessor;
-        public float Test(List<ProcessableStruct> TestingData) {
-            int correct = 0;
-            foreach (var tp in TestingData) {
+        KNN.KNNHandler knn = new KNN.KNNHandler();
 
-                var expected = tp.Output;
-                var actual = KProcessor.GetProbablePoint(tp.Inputs.ToArray());
-                if (expected == actual) {
+        public float Test(List<ProcessableStruct> TestingData) {
+            var correct = 0;
+            foreach (var td in TestingData) {
+                var result = knn.GetProbablePoint(td.Inputs.ToArray());
+                if (result == td.Output) {
                     correct++;
                 }
             }
-
             Console.WriteLine($"{correct} correct out of {TestingData.Count} queries...");
             return (float)correct / (float)TestingData.Count;
         }
 
         public void Train(List<ProcessableStruct> TrainingData, int iterations = 0) {
-            this.KProcessor = new KNN.KNNHandler();
-            foreach (var rp in TrainingData) {
-                KProcessor.AddReferencePoint(rp.Output, rp.Inputs.ToArray());
+            foreach (var td in TrainingData) {
+                knn.AddReferencePoint(td.Output, td.Inputs.ToArray());
             }
         }
     }

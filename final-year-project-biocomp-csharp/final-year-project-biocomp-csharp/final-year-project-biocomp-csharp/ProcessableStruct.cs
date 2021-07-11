@@ -82,5 +82,33 @@ namespace final_year_project_biocomp_csharp {
             }
             return data_2_parsed;
         }
+
+        public static List<ProcessableStruct> ReadData1_Training() {
+            var raw_data = System.IO.File.ReadAllLines(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "dataset1", "data1 - Trainin.txt"));
+            var processed_data = new List<ProcessableStruct>();
+            foreach (var line in raw_data) {
+                var inputs = new List<float>();
+                var output = float.Parse(line.Split(' ')[1]);
+                foreach (var i in line.Split(' ')[0].ToCharArray()) {
+                    inputs.Add(float.Parse(i.ToString()));
+                }
+                processed_data.Add(new ProcessableStruct(inputs, output));
+            }
+            return processed_data;
+        }
+
+        public static List<ProcessableStruct> ReadData1_Testing() {
+            var raw_data = System.IO.File.ReadAllLines(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "dataset1", "data1 - Testin.txt"));
+            var processed_data = new List<ProcessableStruct>();
+            foreach (var line in raw_data) {
+                var inputs = new List<float>();
+                var output = float.Parse(line.Split(' ')[1]);
+                foreach (var i in line.Split(' ')[0].ToCharArray()) {
+                    inputs.Add(float.Parse(i.ToString()));
+                }
+                processed_data.Add(new ProcessableStruct(inputs, output));
+            }
+            return processed_data;
+        }
     }
 }
