@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace final_year_project_biocomp_csharp {
-    class WeightedRandom<T> {
+    public class WeightedRandom<T> {
         private struct Entry {
             public double accumulatedWeight;
             public T item;

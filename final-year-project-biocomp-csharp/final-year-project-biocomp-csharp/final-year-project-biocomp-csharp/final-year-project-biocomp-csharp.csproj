@@ -48,6 +48,8 @@
     <Compile Include="DatasetProcessors\Dataset2\KNNProcessor.cs" />
     <Compile Include="DatasetProcessors\Dataset3\FromScratchProcessor.cs" />
     <Compile Include="DatasetProcessors\ProcessorInterface.cs" />
+    <Compile Include="GeneticAlgorithmRuleBased\CandidateSolution.cs" />
+    <Compile Include="GeneticAlgorithmRuleBased\GeneticAlgorithmRuleBasedSimulation.cs" />
     <Compile Include="GeneticAlgorithm\Candidate.cs" />
     <Compile Include="ProcessableStruct.cs" />
     <Compile Include="GeneticAlgorithm\Simulation.cs" />

@@ -10,6 +10,40 @@ namespace final_year_project_biocomp_csharp {
 
         public static void Main(string[] args) {
 
+
+            //var candidates = new List<GeneticAlgorithmRuleBased.CandidateSolution>();
+
+            //for (int i = 0; i < 10000; i++) {
+            //    candidates.Add(new GeneticAlgorithmRuleBased.CandidateSolution(6));
+            //}
+
+            //var training_set = ProcessableStruct.ReadData2_Training();
+            //foreach (var cand in candidates) {
+            //    cand.RunTestList(training_set);
+            //}
+
+            //candidates.Sort();
+            //candidates.Reverse();
+
+            //foreach (var cand in candidates) {
+            //    Console.WriteLine($"Running Test list : {cand.RuleSet} - {cand.score}");
+            //}
+
+            //Console.ReadLine();
+
+            var training_set = ProcessableStruct.ReadData2_Training();
+            var sim = new GeneticAlgorithmRuleBased.GeneticAlgorithmRuleBasedSimulation(25, 6, training_set);
+            sim.Run(1000);
+
+            var BestCandidateTestingScore = sim.BestCandidate.RunTestList(ProcessableStruct.ReadData2_Testing()) * 100;
+            Console.WriteLine($"Candidate testing result : {BestCandidateTestingScore}% accurate");
+            
+
+            Console.ReadLine();
+
+        }
+        
+        public void Tests() {
             Console.WriteLine("Running Dataset 1 Processor (KNN)");
             var ds1_p = new DatasetProcessors.Dataset1.KNNProcessor();
             ds1_p.Train(ProcessableStruct.ReadData1_Training());
@@ -30,43 +64,7 @@ namespace final_year_project_biocomp_csharp {
             var ds3_score = ds3_p.Test(ProcessableStruct.ReadData3_Testing());
             Console.WriteLine($"Dataset 3 testing score : {ds3_score}...\nPress enter to continue...\n\n");
             Console.ReadLine();
-
         }
-
-        public static void RunKNNTest() {
-            Console.WriteLine("Starting program...");
-
-
-            var data2Training = ProcessableStruct.ReadData2_Training();
-            var data2Testing = ProcessableStruct.ReadData2_Testing();
-            var knn = new KNN.KNNHandler();
-
-            foreach (var rp in data2Training) {
-                knn.AddReferencePoint(rp.Output, rp.Inputs.ToArray());
-            }
-
-            int correct = 0;
-            foreach (var tp in data2Testing) {
-
-                var expected = tp.Output;
-                var actual = knn.GetProbablePoint(tp.Inputs.ToArray());
-
-                Console.WriteLine($"Expecting {expected} --> Actual {actual}");
-
-                if (expected == actual) {
-                    correct++;
-                }
-            }
-
-            Console.WriteLine($"Correct : {correct} correct out of {data2Testing.Count}");
-            Console.ReadLine();
-
-        }
-
-
-
-
-
 
     }
 }
