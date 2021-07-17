@@ -89,7 +89,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
 
 
             for (int i = 0; i < this.PopulationCount / 2; i++) {
-                var parent_a = WeightedBag.GetRandom();
+                var parent_a = Common.GlobalRandom.Next(0, 4) == 3 ? WeightedBag.GetRandom() : TopCandidate;
                 var parent_b = WeightedBag.GetRandom();
 
                 var mixed = MateAndMutate(
