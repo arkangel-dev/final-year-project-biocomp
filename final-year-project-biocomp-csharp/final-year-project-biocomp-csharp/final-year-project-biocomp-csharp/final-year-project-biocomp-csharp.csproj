@@ -44,13 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="DatasetProcessors\Dataset1\GAProcessor.cs" />
     <Compile Include="DatasetProcessors\Dataset1\KNNProcessor.cs" />
+    <Compile Include="DatasetProcessors\Dataset2\GALogicFilterProcessor.cs" />
     <Compile Include="DatasetProcessors\Dataset2\GAProcessor.cs" />
     <Compile Include="DatasetProcessors\Dataset2\KNNProcessor.cs" />
     <Compile Include="DatasetProcessors\Dataset3\FromScratchProcessor.cs" />
     <Compile Include="DatasetProcessors\ProcessorInterface.cs" />
+    <Compile Include="GeneticAlgorithmLogicFiltering\CandidateSolution.cs" />
+    <Compile Include="GeneticAlgorithmLogicFiltering\Simulation.cs" />
     <Compile Include="GeneticAlgorithmRuleBased\CandidateSolution.cs" />
-    <Compile Include="GeneticAlgorithmRuleBased\GeneticAlgorithmRuleBasedSimulation.cs" />
+    <Compile Include="GeneticAlgorithmRuleBased\Simulation.cs" />
     <Compile Include="GeneticAlgorithm\Candidate.cs" />
     <Compile Include="ProcessableStruct.cs" />
     <Compile Include="GeneticAlgorithm\Simulation.cs" />

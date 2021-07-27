@@ -5,21 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace final_year_project_biocomp_csharp.DatasetProcessors.Dataset2 {
-    class GAProcessor : ProcessorInterface {
+    class GALogicFilterProcessor : ProcessorInterface {
 
-        GeneticAlgorithmRuleBased.Simulation sim;
+        GeneticAlgorithmLogicFiltering.Simulation sim;
+
         public float Test(List<ProcessableStruct> TestingData) {
-            var BestCandidateTestingScore = sim.BestCandidate.RunTestList(ProcessableStruct.ReadData2_Testing());
-            Console.WriteLine($"Candidate testing result : {BestCandidateTestingScore * 100}% accurate");
+            var BestCandidateTestingScore = sim.CurrentGeneration[0].EvaulateGroup(ProcessableStruct.ReadData2_Testing());
             return BestCandidateTestingScore;
         }
 
         public void Train(List<ProcessableStruct> TrainingData, int iterations = 1000) {
-            sim = new GeneticAlgorithmRuleBased.Simulation(25, 6, TrainingData);
+            sim = new GeneticAlgorithmLogicFiltering.Simulation(20, 6, ProcessableStruct.ReadData1_Training());
             sim.Run(iterations);
         }
-
-
-        
     }
 }

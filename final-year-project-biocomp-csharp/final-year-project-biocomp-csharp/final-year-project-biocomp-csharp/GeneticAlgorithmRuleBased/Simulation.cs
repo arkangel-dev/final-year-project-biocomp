@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace final_year_project_biocomp_csharp.GeneticAlgorithmRuleBased {
-    public class GeneticAlgorithmRuleBasedSimulation {
+    public class Simulation {
         public List<CandidateSolution> CurrentGeneration;
         public List<CandidateSolution> NextGeneration;
         public List<ProcessableStruct> TestingData;
@@ -19,7 +19,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmRuleBased {
         /// <param name="population_size">Population Size</param>
         /// <param name="target_size">The amount of bits on the input the dataset</param>
         /// <param name="TestingData">Testing data to use in the training session</param>
-        public GeneticAlgorithmRuleBasedSimulation(int population_size, int target_size, List<ProcessableStruct> TestingData) {
+        public Simulation(int population_size, int target_size, List<ProcessableStruct> TestingData) {
 
             this.CurrentGeneration = new List<CandidateSolution>();
             this.NextGeneration = new List<CandidateSolution>();
