@@ -34,11 +34,11 @@ namespace final_year_project_biocomp_csharp {
             //Console.WriteLine($"Candidate B Gene : {candb.Gene}");
             //Console.WriteLine($"Candidate C Gene : {candc.Gene}");
 
-            for (int i = 0; i < 200; i++) {
+            for (int i = 0; i < 1; i++) {
 
-                var Simulation = new GeneticAlgorithmLogicFiltering.Simulation(15, 5, ProcessableStruct.ReadData1_Training());
-                Simulation.Run(3000);
-                var testing_score = Simulation.CurrentGeneration[0].EvaulateGroup(ProcessableStruct.ReadData1_Testing());
+                var Simulation = new GeneticAlgorithmLogicFiltering.Simulation(15, 6, ProcessableStruct.ReadData2_Training());
+                Simulation.Run(2500, "data.csv", 5);
+                var testing_score = Simulation.CurrentGeneration[0].EvaulateGroup(ProcessableStruct.ReadData2_Testing());
                 var og_col = Console.ForegroundColor;
                 Console.ForegroundColor = testing_score > 0.5 ? ConsoleColor.Green : ConsoleColor.Red;
                 var verdict = testing_score > 0.5 ? "Acceptable" : "Unacceptable";

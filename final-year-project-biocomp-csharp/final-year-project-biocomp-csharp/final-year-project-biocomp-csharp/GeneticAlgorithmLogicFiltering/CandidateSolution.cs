@@ -23,14 +23,31 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
             GenerateGene();
         }
 
-        public CandidateSolution MateWeith(CandidateSolution c) {
+        public CandidateSolution MateWith(CandidateSolution c) {
             var intersectionPoint = Common.GlobalRandom.Next(1, c.Gene.Count);
             var newGene = new List<int>();
             newGene.AddRange(Gene.GetRange(0, intersectionPoint));
             newGene.AddRange(c.Gene.GetRange(intersectionPoint, c.Gene.Count - intersectionPoint));
-            var newCand = new CandidateSolution(this.Size);
-            newCand.Gene = newGene;
-            return newCand;
+            var child = new CandidateSolution(this.Size);
+            child.Gene = newGene;
+            return child;
+        }
+
+        public CandidateSolution MateWith2Point(CandidateSolution c) {
+            var intersection_points = new List<int>();
+            intersection_points.Add(Common.GlobalRandom.Next(1, c.Gene.Count));
+            intersection_points.Add(Common.GlobalRandom.Next(1, c.Gene.Count));
+
+            intersection_points.Sort();
+
+            var newGene = new List<int>();
+            newGene.AddRange(Gene.GetRange(0, intersection_points[0]));
+            newGene.AddRange(c.Gene.GetRange(intersection_points[0], intersection_points[1] - intersection_points[0]));
+            newGene.AddRange(Gene.GetRange(intersection_points[1], Gene.Count - intersection_points[1]));
+
+            var child = new CandidateSolution(this.Size);
+            child.Gene = newGene;
+            return child;
         }
 
         public void Mutate(int iter) {
