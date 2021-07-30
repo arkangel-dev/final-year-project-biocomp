@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         private void VarInit() {
             this.Candidates = new List<Candidate>();
             this.InputCount = 6;
-            this.PopulationCount = 50;
+            this.PopulationCount = 15;
             this.CurrentGenerationScore = 0.0f;
             this.MutateIterations = 11;
             this.MixIterations = 1;
@@ -153,14 +154,30 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
         public void RunSimulation(List<ProcessableStruct> c, int Iterations, List<float> w) {
             this.RunExamAndSort(c);
             this.Candidates[0].Brain.SetBrainConfiguration(w);
-            this.RunSimulation(c, Iterations);
+            this.RunSimulation(c, Iterations, "data3.csv", 5);
         }
         public float CompletionTimeSeconds = 0.0f;
-        public void RunSimulation(List<ProcessableStruct> c, int Iterations) {
+
+
+        public int SamplingRate = 1;
+        public int SamplingCounter = 0;
+        public string OutputFilePath;
+        public string OutputFileBuffer;
+
+        public void RunSimulation(List<ProcessableStruct> c, int Iterations, string output = null, int samplingrate = 1) {
 
             Console.CancelKeyPress += ExitConsole;
 
             RunExamAndSort(c);
+
+            this.OutputFilePath = output;
+            this.SamplingRate = samplingrate;
+            this.SamplingCounter = 0;
+            if (output != null) {
+                OutputFilePath = output;
+                OutputFileBuffer = "Generation,BestCandidate, Average, WorstCandidate\n";
+            }
+
 
             float LastScore = -1;
             var first_best_score = this.Candidates[0].Score;
@@ -249,6 +266,13 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                     (this.CurrentGenerationScore / this.Candidates.Count),
                     this.Candidates[0].Score
                 );
+
+                if (OutputFilePath != null && SamplingCounter>= SamplingRate) {
+                    OutputFileBuffer += $"{i}, {Candidates[0].Score}, {(this.CurrentGenerationScore / this.Candidates.Count)}, {Candidates[Candidates.Count - 1].Score}\n";
+                    SamplingCounter = 0;
+                }
+
+                SamplingCounter++;
             }
 
             var CompletionTime = (DateTime.Now - StartTime).TotalSeconds;
@@ -265,6 +289,10 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
             Console.WriteLine(String.Format("Duration : {0} seconds", CompletionTime));
             RunExamAndSort(c);
 
+
+            if (OutputFilePath != null) {
+                File.WriteAllText(OutputFilePath, OutputFileBuffer);
+            }
             //this.PrintScores();
 
         }

@@ -18,7 +18,7 @@ namespace final_year_project_biocomp_csharp.DatasetProcessors.Dataset3 {
         public void Train(List<ProcessableStruct> TrainingData, int iterations = 0) {
             Console.WriteLine($"Running Training for {iterations} iterations...");
             this.sim = new GeneticAlgorithm.Simulation(2, 5);
-            this.sim.RunSimulation(TrainingData, iterations);
+            this.sim.RunSimulation(TrainingData, iterations , "data3.csv", 5);
         }
     }
 }

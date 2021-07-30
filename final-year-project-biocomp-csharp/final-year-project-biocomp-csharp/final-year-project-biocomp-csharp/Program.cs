@@ -34,23 +34,27 @@ namespace final_year_project_biocomp_csharp {
             //Console.WriteLine($"Candidate B Gene : {candb.Gene}");
             //Console.WriteLine($"Candidate C Gene : {candc.Gene}");
 
-            for (int i = 0; i < 1; i++) {
+            //for (int i = 0; i < 1; i++) {
 
-                var Simulation = new GeneticAlgorithmLogicFiltering.Simulation(15, 6, ProcessableStruct.ReadData2_Training());
-                Simulation.Run(2500, "data.csv", 5);
-                var testing_score = Simulation.CurrentGeneration[0].EvaulateGroup(ProcessableStruct.ReadData2_Testing());
-                var og_col = Console.ForegroundColor;
-                Console.ForegroundColor = testing_score > 0.5 ? ConsoleColor.Green : ConsoleColor.Red;
-                var verdict = testing_score > 0.5 ? "Acceptable" : "Unacceptable";
-                Console.WriteLine($"Testing Score : {testing_score} : {verdict} ");
-                Console.ForegroundColor = og_col;
-            }
-            Console.WriteLine("Done Training...\n");
+            //    var Simulation = new GeneticAlgorithmLogicFiltering.Simulation(15, 6, ProcessableStruct.ReadData2_Training());
+            //    Simulation.Run(2500, "data.csv", 5);
+            //    var testing_score = Simulation.CurrentGeneration[0].EvaulateGroup(ProcessableStruct.ReadData2_Testing());
+            //    var og_col = Console.ForegroundColor;
+            //    Console.ForegroundColor = testing_score > 0.5 ? ConsoleColor.Green : ConsoleColor.Red;
+            //    var verdict = testing_score > 0.5 ? "Acceptable" : "Unacceptable";
+            //    Console.WriteLine($"Testing Score : {testing_score} : {verdict} ");
+            //    Console.ForegroundColor = og_col;
+            //}
+            //Console.WriteLine("Done Training...\n");
+
+            var ds3_p = new DatasetProcessors.Dataset3.FromScratchProcessor();
+            ds3_p.Train(ProcessableStruct.ReadData3_Training(), 2500);
+
             Console.ReadLine();
 
             //Tests();
         }
-        
+
         public static void Tests() {
             Console.WriteLine("Running Dataset 1 Processor (KNN)");
             var ds1knn_p = new DatasetProcessors.Dataset1.KNNProcessor();

@@ -79,7 +79,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
                     break;
                 }
                 CurrentGeneration.Sort();
-                //NextGeneration.Add(CurrentGeneration[0]);
+                NextGeneration.Add(CurrentGeneration[0]);
 
 
 
@@ -96,7 +96,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
                     var cb = WeightBag.GetRandom();
                     var child_a = ca.MateWith(cb);
              
-                    if (Common.GlobalRandom.NextDouble() > 0.9) {
+                    if (Common.GlobalRandom.NextDouble() > 0.95) {
                         child_a.Mutate(1);
                     }
                    
