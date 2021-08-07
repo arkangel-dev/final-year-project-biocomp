@@ -90,7 +90,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
 
 
             for (int i = 0; i < this.PopulationCount / 2; i++) {
-                var parent_a = Common.GlobalRandom.Next(0, 4) == 3 ? WeightedBag.GetRandom() : TopCandidate;
+                var parent_a = Common.GlobalRandom.Next(0, 2) == 1 ? WeightedBag.GetRandom() : TopCandidate;
                 var parent_b = WeightedBag.GetRandom();
 
                 var mixed = MateAndMutate(
@@ -134,7 +134,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                         a[mutate_point] = Common.GetRandomNumber(-1, 1);
                         b[mutate_point] = Common.GetRandomNumber(-1, 1);
                     } else {
-                        if (Common.GlobalRandom.Next(0, 1) == 0) {
+                        if (Common.GlobalRandom.Next(0, 2) == 0) {
                             a[mutate_point] += this.MutationMagnitude;
                             b[mutate_point] += this.MutationMagnitude;
                         } else {
@@ -213,7 +213,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithm {
                     SimJumpCount++;
                     Console.Write(debugl);
                     Console.WriteLine("");
-                    //JumpIterations -= (int)(MaxSearchPeriod / 2);
+                    //JumpIterations -= (int)(MaxSearchPeriod / 10);
                     Jumps += 1;
                     LastScore = this.Candidates[0].Score;
                     OverwriteBestConfiguration(this.Candidates[0]);

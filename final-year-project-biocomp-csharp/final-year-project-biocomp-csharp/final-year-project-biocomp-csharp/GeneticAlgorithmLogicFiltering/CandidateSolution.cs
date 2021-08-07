@@ -154,10 +154,10 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
                 case 0: return (bitap & bitbp);
                 case 1: return (bitap | bitbp);
                 case 2: return (bitap ^ bitbp);
-                case 3: return (!bitap | bitbp);
-                case 4: return (bitap | !bitbp);
-                case 5: return !(bitap & bitbp);
-                case 6: return !(bitap | bitbp);
+                case 3: return !(bitap & bitbp);
+                case 4: return !(bitap | bitbp);
+                case 5: return !(bitap ^ bitbp);
+
             }
             throw new Exception($"Cannot find operation index {ruleindex}");
         }
@@ -170,7 +170,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
             }
 
             for (int i = 0; i < 15; i++) {
-                this.Gene.Add(Common.GlobalRandom.Next(0, 7));
+                this.Gene.Add(Common.GlobalRandom.Next(0, 6));
             }
         }
 
@@ -188,6 +188,13 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
             if (other.Score < this.Score) return -1;
             return 0;
 
+        }
+
+        public CandidateSolution Clone() {
+            var clone = new CandidateSolution(this.Size);
+            clone.Gene = new List<int>();
+            clone.Gene.AddRange(this.Gene);
+            return clone;
         }
     }
 }

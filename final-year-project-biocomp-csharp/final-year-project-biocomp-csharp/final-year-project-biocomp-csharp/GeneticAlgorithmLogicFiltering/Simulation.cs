@@ -89,14 +89,20 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
                 } 
 
                 SamplingRateCounter++;
-                
+
+                for (int z = 0; z < 1; z++) {
+                    var clone = this.CurrentGeneration[0].Clone();
+                    clone.Mutate(1);
+                    this.NextGeneration.Add(clone);
+                }
+
 
                 while (NextGeneration.Count < PopulationSize) {
                     var ca = WeightBag.GetRandom();
                     var cb = WeightBag.GetRandom();
                     var child_a = ca.MateWith(cb);
              
-                    if (Common.GlobalRandom.NextDouble() > 0.95) {
+                    if (Common.GlobalRandom.NextDouble() < 0.1) {
                         child_a.Mutate(1);
                     }
                    
@@ -105,8 +111,9 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
                 }
                 TransferGeneration();
 
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write($"\rIteration : {(i + 1).ToString().PadRight(10, ' ')} | Population : {AveragePopulationScore}");
-
+                Console.ResetColor();
 
             }
 
@@ -114,7 +121,7 @@ namespace final_year_project_biocomp_csharp.GeneticAlgorithmLogicFiltering {
                 File.WriteAllText(OutputFilePath, OutputFileBuffer);
             }
 
-            Console.Write("\n");
+            Console.WriteLine("\n");
         }
 
         /// <summary>

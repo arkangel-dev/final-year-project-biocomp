@@ -15,7 +15,7 @@ namespace final_year_project_biocomp_csharp.DatasetProcessors.Dataset2 {
         }
 
         public void Train(List<ProcessableStruct> TrainingData, int iterations = 1000) {
-            sim = new GeneticAlgorithmLogicFiltering.Simulation(20, 6, ProcessableStruct.ReadData1_Training());
+            sim = new GeneticAlgorithmLogicFiltering.Simulation(16, 6, ProcessableStruct.ReadData2_Training());
             sim.Run(iterations);
         }
     }
